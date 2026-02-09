@@ -36,3 +36,5 @@ The table below is generated from `problems.csv`; each entry links to the auto-g
 | --- | --- | --- | --- | --- |
 | 88 | [merge-sorted-array](problems/88_merge-sorted-array/Readme.md) | easy | array, two-pointers, sorting | https://leetcode.com/problems/merge-sorted-array/ |
 | 169 | [majority-element](problems/169_majority-element/Readme.md) | easy | array, hash-table, divide-and-conquer, sorting, counting | https://leetcode.com/problems/majority-element/ |
+| 262 | [trips-and-users](problems/262_trips-and-users/Readme.md) | hard | database | https://leetcode.com/problems/trips-and-users/ |
+| 3554 | [find-category-recommendation-pairs](problems/3554_find-category-recommendation-pairs/Readme.md) | hard | database | https://leetcode.com/problems/find-category-recommendation-pairs/ |
