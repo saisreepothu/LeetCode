@@ -18,7 +18,7 @@ import pathlib
 import re
 import sys
 from requests.exceptions import RequestException
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import requests
 
@@ -109,6 +109,25 @@ def build_metadata(problem: Dict[str, Any], url: str) -> Dict[str, Any]:
     }
 
 
+def normalize_problem_content(content: str) -> str:
+    """Light cleanup so LeetCode HTML renders better in local Markdown previews."""
+    cleaned = content.strip()
+    cleaned = re.sub(r"<div[^>]*>", "", cleaned)
+    cleaned = cleaned.replace("</div>", "")
+    cleaned = re.sub(r"<pre[^>]*>", "<pre>", cleaned)
+
+    lines = []
+    prev_line = None
+    for raw_line in cleaned.splitlines():
+        line = raw_line.rstrip()
+        if line and line == prev_line:
+            continue
+        lines.append(line)
+        prev_line = line
+
+    return "\n".join(lines).strip()
+
+
 def write_files(problem: Dict[str, Any], metadata: Dict[str, Any]) -> None:
     """Persist the Readme/metadata only—solution stub files are created later by the user."""
     slug = problem["titleSlug"]
@@ -117,7 +136,10 @@ def write_files(problem: Dict[str, Any], metadata: Dict[str, Any]) -> None:
     problem_dir.mkdir(parents=True, exist_ok=True)
 
     readme = problem_dir / "Readme.md"
-    readme_content = f"# {problem['title']}\n\nSource: {metadata['url']}\n\n{problem['content'].strip()}\n"
+    normalized_content = normalize_problem_content(problem["content"])
+    readme_content = (
+        f"# {problem['title']}\n\nSource: {metadata['url']}\n\n{normalized_content}\n"
+    )
     readme.write_text(readme_content)
 
     metadata_path = problem_dir / "metadata.json"
@@ -143,26 +165,43 @@ def append_problem_csv(metadata: Dict[str, Any]) -> None:
         "reviews_7d",
         "reviews_30d",
     ]
-    if not csv_path.exists() or csv_path.stat().st_size == 0:
-        csv_path.write_text(",".join(header) + "\n")
-
     reviews = metadata.get("reviews", {})
-    row = [
-        metadata.get("id", ""),
-        metadata.get("slug", ""),
-        metadata.get("difficulty", ""),
-        ";".join(metadata.get("topics", [])),
-        metadata.get("date_solved", ""),
-        metadata.get("url", ""),
-        metadata.get("attempts", ""),
-        reviews.get("1d", ""),
-        reviews.get("7d", ""),
-        reviews.get("30d", ""),
-    ]
+    new_row = {
+        "id": str(metadata.get("id", "")),
+        "slug": str(metadata.get("slug", "")),
+        "difficulty": str(metadata.get("difficulty", "")),
+        "topics": ";".join(metadata.get("topics", [])),
+        "date_solved": str(metadata.get("date_solved", "")),
+        "url": str(metadata.get("url", "")),
+        "attempts": str(metadata.get("attempts", "")),
+        "reviews_1d": str(reviews.get("1d", "")),
+        "reviews_7d": str(reviews.get("7d", "")),
+        "reviews_30d": str(reviews.get("30d", "")),
+    }
 
-    with csv_path.open("a", newline="") as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow(row)
+    rows: List[Dict[str, str]] = []
+    if csv_path.exists() and csv_path.stat().st_size > 0:
+        with csv_path.open(newline="") as csv_file:
+            reader = csv.DictReader(csv_file)
+            for row in reader:
+                normalized = {key: row.get(key, "") for key in header}
+                rows.append(normalized)
+
+    replaced = False
+    for idx, row in enumerate(rows):
+        if row.get("id") == new_row["id"] and row.get("slug") == new_row["slug"]:
+            rows[idx] = new_row
+            replaced = True
+            break
+    if not replaced:
+        rows.append(new_row)
+
+    rows.sort(key=lambda r: int(r["id"]) if str(r.get("id", "")).isdigit() else 10**9)
+
+    with csv_path.open("w", newline="") as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=header)
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 def main(argv: list[str]) -> int:
