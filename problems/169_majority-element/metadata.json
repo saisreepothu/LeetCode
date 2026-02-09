@@ -1,0 +1,20 @@
+{
+  "id": 169,
+  "slug": "majority-element",
+  "difficulty": "easy",
+  "topics": [
+    "array",
+    "hash-table",
+    "divide-and-conquer",
+    "sorting",
+    "counting"
+  ],
+  "date_solved": "2026-02-09",
+  "url": "https://leetcode.com/problems/majority-element/",
+  "attempts": 1,
+  "reviews": {
+    "1d": "2026-02-10",
+    "7d": "2026-02-16",
+    "30d": "2026-03-11"
+  }
+}
