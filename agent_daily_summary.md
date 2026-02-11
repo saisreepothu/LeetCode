@@ -27,6 +27,14 @@ You are an automation agent that compiles a daily summary of solved LeetCode pro
                rows.append(row)
 
    rows.sort(key=lambda r: int(r['id']))
+   sql_rows = []
+   dsa_rows = []
+   for r in rows:
+       topics = {t.strip().lower() for t in r['topics'].split(';') if t.strip()}
+       if 'database' in topics:
+           sql_rows.append(r)
+       else:
+           dsa_rows.append(r)
 
    base = pathlib.Path('summary/daily')
    base.mkdir(parents=True, exist_ok=True)
@@ -41,18 +49,31 @@ You are an automation agent that compiles a daily summary of solved LeetCode pro
        for r in rows:
            counts[r["difficulty"]] = counts.get(r["difficulty"], 0) + 1
        lines.append('Counts by difficulty: ' + ', '.join(f'{k}={v}' for k, v in sorted(counts.items())))
+       lines.append(f'DSA (Python): {len(dsa_rows)}')
+       lines.append(f'SQL: {len(sql_rows)}')
        lines.append('')
-       lines.append('| id | slug | difficulty | topics | url |')
-       lines.append('| --- | --- | --- | --- | --- |')
-       for r in rows:
-           pid = int(r['id'])
-           slug = r['slug']
-           diff = r['difficulty']
-           topics = r['topics'].replace(';', ', ')
-           url = r['url']
-           # summary files live in summary/daily/, so links must go up two levels.
-           link = f'[{slug}](../../problems/{pid}_{slug}/Readme.md)'
-           lines.append(f'| {pid} | {link} | {diff} | {topics} | {url} |')
+       def append_section(title, section_rows):
+           lines.append(f'## {title}')
+           lines.append('')
+           if not section_rows:
+               lines.append('No problems in this section.')
+               lines.append('')
+               return
+           lines.append('| id | slug | difficulty | topics | url |')
+           lines.append('| --- | --- | --- | --- | --- |')
+           for r in section_rows:
+               pid = int(r['id'])
+               slug = r['slug']
+               diff = r['difficulty']
+               topics = r['topics'].replace(';', ', ')
+               url = r['url']
+               # summary files live in summary/daily/, so links must go up two levels.
+               link = f'[{slug}](../../problems/{pid}_{slug}/Readme.md)'
+               lines.append(f'| {pid} | {link} | {diff} | {topics} | {url} |')
+           lines.append('')
+
+       append_section('DSA (Python) Problems', dsa_rows)
+       append_section('SQL Problems', sql_rows)
 
    out_path.write_text('\\n'.join(lines) + '\\n', encoding='utf-8')
    print(f'Wrote {out_path}')
@@ -60,6 +81,8 @@ You are an automation agent that compiles a daily summary of solved LeetCode pro
    ```
 3. Output file location: `summary/daily/<date>.md`. If no problems were solved on the target date, still emit a file noting that status.
 4. Review the generated file for correctness (counts, links, difficulty, topics, URLs) before finishing.
+   - Ensure problems are split into `## DSA (Python) Problems` and `## SQL Problems`.
+   - Classification rule: if `database` appears in `topics`, it is SQL; otherwise DSA (Python).
 5. Link safety check (must pass):
    - Because output lives in `summary/daily/`, all problem links must start with `../../problems/`.
    - Optional quick check:

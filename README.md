@@ -32,9 +32,18 @@ Detailed guidance for the automation process (what to run and what each artifact
 
 The table below is generated from `problems.csv`; each entry links to the auto-generated problem folder.
 
+### DSA (Python) Problems
+
 | id | slug | difficulty | topics | url |
 | --- | --- | --- | --- | --- |
 | 88 | [merge-sorted-array](problems/88_merge-sorted-array/Readme.md) | easy | array, two-pointers, sorting | https://leetcode.com/problems/merge-sorted-array/ |
 | 169 | [majority-element](problems/169_majority-element/Readme.md) | easy | array, hash-table, divide-and-conquer, sorting, counting | https://leetcode.com/problems/majority-element/ |
+
+### SQL Problems
+
+| id | slug | difficulty | topics | url |
+| --- | --- | --- | --- | --- |
 | 262 | [trips-and-users](problems/262_trips-and-users/Readme.md) | hard | database | https://leetcode.com/problems/trips-and-users/ |
+| 3421 | [find-students-who-improved](problems/3421_find-students-who-improved/Readme.md) | medium | database | https://leetcode.com/problems/find-students-who-improved/ |
+| 3497 | [analyze-subscription-conversion](problems/3497_analyze-subscription-conversion/Readme.md) | medium | database | https://leetcode.com/problems/analyze-subscription-conversion/ |
 | 3554 | [find-category-recommendation-pairs](problems/3554_find-category-recommendation-pairs/Readme.md) | hard | database | https://leetcode.com/problems/find-category-recommendation-pairs/ |

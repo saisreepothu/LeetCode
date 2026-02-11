@@ -1,0 +1,16 @@
+{
+  "id": 3497,
+  "slug": "analyze-subscription-conversion",
+  "difficulty": "medium",
+  "topics": [
+    "database"
+  ],
+  "date_solved": "2026-02-11",
+  "url": "https://leetcode.com/problems/analyze-subscription-conversion/",
+  "attempts": 1,
+  "reviews": {
+    "1d": "2026-02-12",
+    "7d": "2026-02-18",
+    "30d": "2026-03-13"
+  }
+}
