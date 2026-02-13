@@ -1,0 +1,16 @@
+{
+  "id": 1179,
+  "slug": "reformat-department-table",
+  "difficulty": "easy",
+  "topics": [
+    "database"
+  ],
+  "date_solved": "2026-02-12",
+  "url": "https://leetcode.com/problems/reformat-department-table/",
+  "attempts": 1,
+  "reviews": {
+    "1d": "2026-02-13",
+    "7d": "2026-02-19",
+    "30d": "2026-03-14"
+  }
+}

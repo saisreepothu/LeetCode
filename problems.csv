@@ -1,7 +1,12 @@
 id,slug,difficulty,topics,date_solved,url,attempts,reviews_1d,reviews_7d,reviews_30d
+70,climbing-stairs,easy,math;dynamic-programming;memoization,2026-02-12,https://leetcode.com/problems/climbing-stairs/,1,2026-02-13,2026-02-19,2026-03-14
 88,merge-sorted-array,easy,array;two-pointers;sorting,2026-02-09,https://leetcode.com/problems/merge-sorted-array/,1,2026-02-10,2026-02-16,2026-03-11
 169,majority-element,easy,array;hash-table;divide-and-conquer;sorting;counting,2026-02-09,https://leetcode.com/problems/majority-element/,1,2026-02-10,2026-02-16,2026-03-11
 262,trips-and-users,hard,database,2026-02-09,https://leetcode.com/problems/trips-and-users/,1,2026-02-10,2026-02-16,2026-03-11
+290,word-pattern,easy,hash-table;string,2026-02-12,https://leetcode.com/problems/word-pattern/,1,2026-02-13,2026-02-19,2026-03-14
+1050,actors-and-directors-who-cooperated-at-least-three-times,easy,database,2026-02-12,https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times/,1,2026-02-13,2026-02-19,2026-03-14
+1179,reformat-department-table,easy,database,2026-02-12,https://leetcode.com/problems/reformat-department-table/,1,2026-02-13,2026-02-19,2026-03-14
+1407,top-travellers,easy,database,2026-02-12,https://leetcode.com/problems/top-travellers/,1,2026-02-13,2026-02-19,2026-03-14
 3421,find-students-who-improved,medium,database,2026-02-10,https://leetcode.com/problems/find-students-who-improved/,1,2026-02-11,2026-02-17,2026-03-12
 3497,analyze-subscription-conversion,medium,database,2026-02-11,https://leetcode.com/problems/analyze-subscription-conversion/,1,2026-02-12,2026-02-18,2026-03-13
 3554,find-category-recommendation-pairs,hard,database,2026-02-09,https://leetcode.com/problems/find-category-recommendation-pairs/,1,2026-02-10,2026-02-16,2026-03-11
