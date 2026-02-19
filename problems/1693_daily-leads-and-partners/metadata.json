@@ -1,0 +1,16 @@
+{
+  "id": 1693,
+  "slug": "daily-leads-and-partners",
+  "difficulty": "easy",
+  "topics": [
+    "database"
+  ],
+  "date_solved": "2026-02-13",
+  "url": "https://leetcode.com/problems/daily-leads-and-partners",
+  "attempts": 1,
+  "reviews": {
+    "1d": "2026-02-14",
+    "7d": "2026-02-20",
+    "30d": "2026-03-15"
+  }
+}

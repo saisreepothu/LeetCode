@@ -1,0 +1,18 @@
+{
+  "id": 383,
+  "slug": "ransom-note",
+  "difficulty": "easy",
+  "topics": [
+    "hash-table",
+    "string",
+    "counting"
+  ],
+  "date_solved": "2026-02-18",
+  "url": "https://leetcode.com/problems/ransom-note/",
+  "attempts": 1,
+  "reviews": {
+    "1d": "2026-02-19",
+    "7d": "2026-02-25",
+    "30d": "2026-03-20"
+  }
+}
